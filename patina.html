@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patina Magazine - Pitch Submission</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Variables for Patina Color Palette */
+        :root {
+            --deep-red: #9E3A26;
+            --cream: #EDD6C7;
+            --gold: #F3A236;
+            --deep-blue: #284270;
+            --white: #FFFFFF;
+            --light-gray: #F8F8F8;
+            --dark-gray: #333333;
+            --border-gray: #E5E5E5;
+            --error-red: #DC3545;
+            --success-green: #28A745;
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-gray);
+            background-color: var(--white);
+        }
+
+        /* Form Container */
+        .patina-form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+            background: var(--white);
+        }
+
+        /* Header */
+        .form-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .form-title {
+            font-family: 'Source Serif Pro', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--deep-red);
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .form-subtitle {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Form Styles */
+        .patina-form {
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            border: 1px solid var(--border-gray);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        .form-group label.required::after {
+            content: " *";
+            color: var(--deep-red);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border-gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: 'DM Sans', sans-serif;
+            transition: all 0.3s ease;
+            background: var(--white);
+        }
+
+        .form-control::placeholder {
+            color: #9CA3AF;
+            opacity: 1;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--deep-red);
+            box-shadow: 0 0 0 3px rgba(158, 58, 38, 0.1);
+        }
+
+        .form-control.error {
+            border-color: var(--error-red);
+        }
+
+        .form-control.success {
+            border-color: var(--success-green);
+        }
+
+        /* Radio Button Styles */
+        .radio-group {
+            display: flex;
+            gap: 2rem;
+            margin-top: 0.5rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--deep-red);
+        }
+
+        .radio-option label {
+            margin: 0;
+            cursor: pointer;
+            font-weight: 400;
+        }
+
+        /* Conditional Field */
+        .conditional-field {
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .conditional-field.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Textarea */
+        textarea.form-control {
+            min-height: 200px;
+            resize: vertical;
+            line-height: 1.6;
+        }
+
+        /* Select Dropdown */
+        select.form-control {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-right: 2.5rem;
+            appearance: none;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: var(--deep-red);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-family: 'DM Sans', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .submit-btn:hover {
+            background: #8a2f1f;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(158, 58, 38, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            background: var(--border-gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* Loading State */
+        .submit-btn.loading {
+            position: relative;
+            color: transparent;
+        }
+
+        .submit-btn.loading::after {
+            content: "";
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            top: 50%;
+            left: 50%;
+            margin-left: -10px;
+            margin-top: -10px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Error Messages */
+        .error-message {
+            color: var(--error-red);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Success Message */
+        .success-message {
+            background: var(--success-green);
+            color: var(--white);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 2rem;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .patina-form-container {
+                padding: 2rem 1rem;
+            }
+
+            .form-title {
+                font-size: 2rem;
+            }
+
+            .patina-form {
+                padding: 1.5rem;
+            }
+
+            .radio-group {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .form-control {
+                padding: 0.875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .patina-form-container {
+                padding: 1.5rem 0.75rem;
+            }
+
+            .form-title {
+                font-size: 1.75rem;
+            }
+
+            .patina-form {
+                padding: 1rem;
+            }
+        }
+
+        /* Focus Styles for Accessibility */
+        .form-control:focus,
+        .submit-btn:focus {
+            outline: 2px solid var(--deep-red);
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="patina-form-container">
+        <div class="form-header">
+            <h1 class="form-title">Submit Your Pitch</h1>
+            <p class="form-subtitle">We're looking for creative works that examine legibility and the politics, mechanics, and cultural dynamics of being seen and understood across different contexts. We want pieces that explore legibility from your particular vantage point, and balance analytical insight with lived experience. What do you see about how understanding gets negotiated that others might miss? Where do you encounter the friction between complex realities and simplified systems? Why are you uniquely positioned to explore this aspect of legibility?</p>
+        </div>
+
+        <div class="success-message" id="successMessage">
+            <h3>Thank you for your submission!</h3>
+            <p>We've received your pitch and will review it carefully. You'll hear from us within 2-3 weeks.</p>
+        </div>
+
+        <form class="patina-form" id="pitchForm">
+            <div class="form-group">
+                <label for="writerName" class="required">Your Name</label>
+                <input type="text" id="writerName" name="writerName" class="form-control" required>
+                <div class="error-message" id="writerNameError">Please enter your name</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="required">Email Address</label>
+                <input type="email" id="email" name="email" class="form-control" required>
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="pitchTitle" class="required">Pitch Title/Headline</label>
+                <input type="text" id="pitchTitle" name="pitchTitle" class="form-control" required>
+                <div class="error-message" id="pitchTitleError">Please enter a pitch title</div>
+            </div>
+
+            <div class="form-group">
+                <label class="required">Has this story been published elsewhere?</label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="publishedNo" name="publishedElsewhere" value="No" required>
+                        <label for="publishedNo">No</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="publishedYes" name="publishedElsewhere" value="Yes" required>
+                        <label for="publishedYes">Yes</label>
+                    </div>
+                </div>
+                <div class="error-message" id="publishedElsewhereError">Please select an option</div>
+            </div>
+
+            <div class="form-group conditional-field" id="publicationDetailsGroup">
+                <label for="publicationDetails">Where and when published?</label>
+                <input type="text" id="publicationDetails" name="publicationDetails" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label for="wordCount" class="required">Proposed word count for final piece</label>
+                <input type="number" id="wordCount" name="wordCount" class="form-control" min="100" max="5000" required>
+                <div class="error-message" id="wordCountError">Please enter a word count between 100 and 5000</div>
+            </div>
+
+            <div class="form-group">
+                <label for="fullPitch" class="required">Full Pitch</label>
+                <textarea id="fullPitch" name="fullPitch" class="form-control" placeholder="Please include your complete pitch in this field—no attachments" required></textarea>
+                <div class="error-message" id="fullPitchError">Please include your complete pitch</div>
+            </div>
+
+            <div class="form-group">
+                <label for="samplesUrl">Samples of past writing or photo work (Optional)</label>
+                <input type="url" id="samplesUrl" name="samplesUrl" class="form-control" placeholder="Share a Google Drive link, portfolio website, or other URL where we can view your work">
+            </div>
+
+            <div class="form-group">
+                <label for="hearAbout">How did you hear about this call?</label>
+                <select id="hearAbout" name="hearAbout" class="form-control">
+                    <option value="">Select an option</option>
+                    <option value="Instagram">Instagram</option>
+                    <option value="Newsletter">Newsletter</option>
+                    <option value="Word of mouth">Word of mouth</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">
+                Submit Pitch
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Form handling and validation
+        class PatinaPitchForm {
+            constructor() {
+                this.form = document.getElementById('pitchForm');
+                this.submitBtn = document.getElementById('submitBtn');
+                this.successMessage = document.getElementById('successMessage');
+                
+                this.initializeEventListeners();
+                this.setupConditionalField();
+            }
+
+            initializeEventListeners() {
+                this.form.addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Real-time validation
+                const inputs = this.form.querySelectorAll('input, textarea, select');
+                inputs.forEach(input => {
+                    input.addEventListener('blur', () => this.validateField(input));
+                    input.addEventListener('input', () => this.clearFieldError(input));
+                });
+
+                // Radio button change
+                const radioButtons = this.form.querySelectorAll('input[name="publishedElsewhere"]');
+                radioButtons.forEach(radio => {
+                    radio.addEventListener('change', () => this.handlePublishedElsewhereChange());
+                });
+            }
+
+            setupConditionalField() {
+                this.publicationDetailsGroup = document.getElementById('publicationDetailsGroup');
+                this.publicationDetailsInput = document.getElementById('publicationDetails');
+            }
+
+            handlePublishedElsewhereChange() {
+                const publishedYes = document.getElementById('publishedYes');
+                
+                if (publishedYes.checked) {
+                    this.publicationDetailsGroup.classList.add('show');
+                    this.publicationDetailsInput.required = true;
+                } else {
+                    this.publicationDetailsGroup.classList.remove('show');
+                    this.publicationDetailsInput.required = false;
+                    this.publicationDetailsInput.value = '';
+                    this.clearFieldError(this.publicationDetailsInput);
+                }
+            }
+
+            validateField(field) {
+                const fieldName = field.name;
+                const value = field.value.trim();
+                let isValid = true;
+                let errorMessage = '';
+
+                // Clear previous error
+                this.clearFieldError(field);
+
+                // Validation rules
+                switch (fieldName) {
+                    case 'writerName':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Please enter your name';
+                        }
+                        break;
+
+                    case 'email':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Please enter an email address';
+                        } else if (!this.isValidEmail(value)) {
+                            isValid = false;
+                            errorMessage = 'Please enter a valid email address';
+                        }
+                        break;
+
+                    case 'pitchTitle':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Please enter a pitch title';
+                        }
+                        break;
+
+                    case 'publishedElsewhere':
+                        const selected = this.form.querySelector('input[name="publishedElsewhere"]:checked');
+                        if (!selected) {
+                            isValid = false;
+                            errorMessage = 'Please select an option';
+                        }
+                        break;
+
+                    case 'publicationDetails':
+                        const publishedYes = document.getElementById('publishedYes');
+                        if (publishedYes.checked && !value) {
+                            isValid = false;
+                            errorMessage = 'Please provide publication details';
+                        }
+                        break;
+
+                    case 'wordCount':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Please enter a word count';
+                        } else if (value < 100 || value > 5000) {
+                            isValid = false;
+                            errorMessage = 'Word count must be between 100 and 5000';
+                        }
+                        break;
+
+                    case 'fullPitch':
+                        if (!value) {
+                            isValid = false;
+                            errorMessage = 'Please include your complete pitch';
+                        } else if (value.length < 50) {
+                            isValid = false;
+                            errorMessage = 'Please provide a more detailed pitch';
+                        }
+                        break;
+                }
+
+                if (!isValid) {
+                    this.showFieldError(field, errorMessage);
+                }
+
+                return isValid;
+            }
+
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            showFieldError(field, message) {
+                field.classList.add('error');
+                const errorElement = document.getElementById(field.name + 'Error');
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.classList.add('show');
+                }
+            }
+
+            clearFieldError(field) {
+                field.classList.remove('error');
+                const errorElement = document.getElementById(field.name + 'Error');
+                if (errorElement) {
+                    errorElement.classList.remove('show');
+                }
+            }
+
+            validateForm() {
+                const fields = this.form.querySelectorAll('input, textarea, select');
+                let isValid = true;
+
+                fields.forEach(field => {
+                    if (!this.validateField(field)) {
+                        isValid = false;
+                    }
+                });
+
+                return isValid;
+            }
+
+            async handleSubmit(e) {
+                e.preventDefault();
+
+                if (!this.validateForm()) {
+                    return;
+                }
+
+                this.setLoadingState(true);
+
+                try {
+                    const formData = this.getFormData();
+                    await this.submitToSheetDB(formData);
+                    this.showSuccess();
+                    this.form.reset();
+                    this.publicationDetailsGroup.classList.remove('show');
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    alert('There was an error submitting your pitch. Please try again or contact us directly.');
+                } finally {
+                    this.setLoadingState(false);
+                }
+            }
+
+            getFormData() {
+                const formData = new FormData(this.form);
+                const data = {};
+                
+                for (let [key, value] of formData.entries()) {
+                    data[key] = value;
+                }
+
+                // Add timestamp
+                data.timestamp = new Date().toISOString();
+                
+                return data;
+            }
+
+            async submitToSheetDB(data) {
+                // Replace this URL with your actual SheetDB endpoint
+                const SHEETDB_URL = 'https://sheetdb.io/api/v1/wna7rtkkdebmj';
+                
+                const response = await fetch(SHEETDB_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                return response.json();
+            }
+
+            setLoadingState(loading) {
+                if (loading) {
+                    this.submitBtn.classList.add('loading');
+                    this.submitBtn.disabled = true;
+                    this.submitBtn.textContent = 'Submitting...';
+                } else {
+                    this.submitBtn.classList.remove('loading');
+                    this.submitBtn.disabled = false;
+                    this.submitBtn.textContent = 'Submit Pitch';
+                }
+            }
+
+            showSuccess() {
+                this.successMessage.classList.add('show');
+                this.form.style.display = 'none';
+                
+                // Scroll to success message
+                this.successMessage.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            }
+        }
+
+        // Initialize the form when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new PatinaPitchForm();
+        });
+    </script>
+</body>
+</html>
